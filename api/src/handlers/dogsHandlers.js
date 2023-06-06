@@ -1,9 +1,20 @@
+const { createDogDB, getDogDB } = require("../controllers/dogsControllers");
+
 //query --> /?name=""
 
-const getDogsHandler = (req, res) => {
+const getDogsHandler = async (req, res) => {
   const { name } = req.query;
-  if (name) {
-    return res.status(200).send(`se encontro el nombre: ${name}`);
+  try {
+    if (name) {
+      const response = await getDogDB(name);
+      return res.status(200).json(response);
+    }
+    const response = await getDogDB();
+    return res.status(200).json(response);
+
+    res.status(200).send("Todos los usuarios");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -14,13 +25,14 @@ const getDogsIdHandler = (req, res) => {
 };
 
 //dog/post
-const postDogsHandler = (req, res) => {
-  const { name, imagen, altura, peso, añoDeVida } = req.body;
-  res
-    .status(200)
-    .send(
-      `creamos el perro con los datos: nombre: ${name},foto: ${imagen},altura: ${altura},peso:${peso},años de vida:${añoDeVida}`
-    );
+const postDogsHandler = async (req, res) => {
+  const { name, imagen, altura, peso, añosDeVida } = req.body;
+  try {
+    const response = await createDogDB(name, imagen, altura, peso, añosDeVida);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 module.exports = {
