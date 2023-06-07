@@ -1,4 +1,10 @@
-const { createDogDB, getDogDB } = require("../controllers/dogsControllers");
+const {
+  // createDogDB,
+  // getDogDB,
+  getById,
+  getAlldogs,
+  createPostDB,
+} = require("../controllers/dogsControllers");
 
 //query --> /?name=""
 
@@ -6,29 +12,49 @@ const getDogsHandler = async (req, res) => {
   const { name } = req.query;
   try {
     if (name) {
-      const response = await getDogDB(name);
+      const response = await getAlldogs(name);
       return res.status(200).json(response);
     }
-    const response = await getDogDB();
+    const response = await getAlldogs();
     return res.status(200).json(response);
-
-    res.status(200).send("Todos los usuarios");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
 //dog/:idRaza
-const getDogsIdHandler = (req, res) => {
+const getDogsIdHandler = async (req, res) => {
   const { id } = req.params;
-  res.status(200).send(`Usuario con id: ${id}`);
+  try {
+    const response = await getById(id);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 //dog/post
+// const postDogsHandler = async (req, res) => {
+//   const { name, imagen, altura, peso, añosDeVida } = req.body;
+//   try {
+//     const response = await createDogDB(name, imagen, altura, peso, añosDeVida);
+//     res.status(200).json(response);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
 const postDogsHandler = async (req, res) => {
-  const { name, imagen, altura, peso, añosDeVida } = req.body;
+  const { name, imagen, altura, peso, añosDeVida, dogId } = req.body;
   try {
-    const response = await createDogDB(name, imagen, altura, peso, añosDeVida);
+    const response = await createPostDB(
+      name,
+      imagen,
+      altura,
+      peso,
+      añosDeVida,
+      dogId
+    );
     res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error: error.message });
