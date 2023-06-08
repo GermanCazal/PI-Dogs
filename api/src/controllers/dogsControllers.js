@@ -1,11 +1,6 @@
 const { Dog } = require("../db");
 const axios = require("axios");
 
-// const createDogDB = async (name, imagen, altura, peso, añosDeVida) => {
-//   const newDog = await Dog.create({ name, imagen, altura, peso, añosDeVida });
-//   return newDog;
-// };
-
 //traigo un dog por name de la db
 // const getDogDB = async (name) => {
 //   if (name) {
@@ -14,6 +9,13 @@ const axios = require("axios");
 //   }
 //   return allDog;
 // };
+
+//Post de un dog a la DB
+
+const createDogDB = async (name, imagen, altura, peso, añosDeVida) => {
+  const newDog = await Dog.create({ name, imagen, altura, peso, añosDeVida });
+  return newDog;
+};
 
 //traigo un dog por id desde la api o db
 
@@ -68,16 +70,16 @@ const getAlldogs = async (name) => {
 };
 
 //post hago un post a la db
-const createPostDB = async (name, imagen, altura, peso, añosDeVida, dogId) => {
-  const post = await Dog.create({ name, imagen, altura, peso, añosDeVida });
-  await post.setDog(dogId);
-  return post;
-};
+// const createPostDB = async (name, imagen, altura, peso, añosDeVida, dogId) => {
+//   const post = await Dog.create({ name, imagen, altura, peso, añosDeVida });
+//   await post.setDog(dogId);
+//   return post;
+// };
 
 module.exports = {
-  // createDogDB,
+  createDogDB,
   // getDogDB,
   getById,
   getAlldogs,
-  createPostDB,
+  // createPostDB,
 };
