@@ -10,6 +10,6 @@ router.use(morgan("dev"));
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.use("/dogs", dogRouter);
-router.use("/tesmperamet", temperamentRouter);
+router.use("/temperament", temperamentRouter);
 
 module.exports = router;
