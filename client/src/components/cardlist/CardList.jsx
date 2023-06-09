@@ -1,7 +1,13 @@
+import Cards from "../cards/cards";
+import "./cardList.styles.css"
+
 function CardList() {
     return (
-      <div className="CardList">
-        <p>CardList</p>
+      <div className="card-list">
+        <Cards/>
+        <Cards/>
+        <Cards/>
+        <Cards/>
       </div>
     );
   }

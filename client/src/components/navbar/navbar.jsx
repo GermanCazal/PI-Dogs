@@ -1,7 +1,10 @@
 function Navbar() {
     return (
-      <div className="home">
-        <p>navbar</p>
+      <div className="search-box">
+        <form>
+          <input placeholder="Busqueda" />
+          <button>Buscar</button>
+        </form>
       </div>
     );
   }
