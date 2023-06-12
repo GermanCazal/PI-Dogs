@@ -3,6 +3,7 @@ function Navbar() {
       <div className="search-box">
         <form>
           <input placeholder="Busqueda" />
+          <br />
           <button>Buscar</button>
         </form>
       </div>

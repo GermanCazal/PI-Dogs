@@ -1,13 +1,14 @@
 import Cards from "../cards/cards";
 import "./cardList.styles.css"
 
-function CardList() {
+function CardList({allUsers}) {
+
+const usersList = allUsers
     return (
       <div className="card-list">
-        <Cards/>
-        <Cards/>
-        <Cards/>
-        <Cards/>
+       {
+        usersList?.map((user,index)=><Cards key={index} user={user}/>)
+       }
       </div>
     );
   }
