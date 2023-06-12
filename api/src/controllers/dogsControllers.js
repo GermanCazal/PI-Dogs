@@ -42,7 +42,7 @@ const getDogApi = async () => {
     return {
       id: dog.id,
       name: dog.name,
-      imagen: dog.reference_image_id,
+      imagen: dog.image.url,
       altura: dog.height.metric,
       peso: dog.weight.metric,
       añosdeVida: dog.life_span,
