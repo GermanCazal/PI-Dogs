@@ -1,41 +1,43 @@
-import Navbar from "../../components/navbar/navbar";
-import {useDispatch,useSelector} from "react-redux"
-import CardList from "../../components/cardlist/CardList";
 import"./home.styles.css"
+import {clearMessage, getUsers,getUsersByName } from "../../redux/actions";
+import {useDispatch,useSelector} from "react-redux"
 import { useEffect, useState,} from "react";
-
-import { getUsers,getUsersByName } from "../../redux/actions";
+import CardList from "../../components/cardlist/CardList";
+import Navbar from "../../components/navbar/navbar";
 
 
 
 function Home() {
-  const dispatch = useDispatch()
-  const allUsers = useSelector((state)=>state.allUsers);
-//  const [filterd, setFilterd]= useState([])
- const [searchSting,setSearchString]=useState("")
- const messageError = useSelector((state)=> state.message)
+  const dispatch = useDispatch();
+  const allUsers = useSelector((state) => state.allUsers);
+  // const [filtered, setFiltered] = useState([]);
+  const [searchString, setSearchString] = useState("");
+  const messageError = useSelector((state) => state.message);
 
 
 
-   useEffect(()=>{
-    if (!allUsers.length){
+  useEffect(() => {
+    if (!allUsers.length) {
       dispatch(getUsers());
     }
-    if(messageError !==""){
-      alert(messageError)
+    if (messageError !== "") {
+      alert(messageError);
     }
-    // setFilterd(allUsers)
+    return () => {
+      dispatch(clearMessage());
+    };
+
    },[dispatch, allUsers, messageError])
 
 
-const handleChange =(event) =>{
-setSearchString(event.target.value.toLowerCase());
-}
+   const handleChange = (event) => {
+    setSearchString(event.target.value.toLowerCase());
+  };
 
-const handleSubmit =(event)=>{
-   event.preventDeafault();
-   dispatch(getUsersByName(searchSting));
-}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(getUsersByName(searchString));
+  };
 
 
 

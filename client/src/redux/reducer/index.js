@@ -1,18 +1,18 @@
-import { ERROR, GET_USERS, GET_USERS_BY_NAME } from "../actions";
+import { CLEAN_MESSAGE, ERROR, GET_USERS, GET_USERS_BY_NAME } from "../actions";
 
-let initialSate = {
+let initialState = {
   allUsers: [],
-  copyUser: [],
+  copyUsers: [],
   message: "",
 };
 
-function rootReducer(state = initialSate, action) {
+function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_USERS:
       return {
         ...state,
-        allUsers: action.payload,
-        copyUser: [...action.payload],
+        allUsers: action.payload, // [usuarios]
+        copyUsers: [...action.payload], // copiar con el spread para que sea un array nuevo y se quede la refencia
       };
     case GET_USERS_BY_NAME:
       return {
@@ -23,6 +23,11 @@ function rootReducer(state = initialSate, action) {
       return {
         ...state,
         message: action.payload,
+      };
+    case CLEAN_MESSAGE:
+      return {
+        ...state,
+        message: "",
       };
 
     default:
