@@ -56,6 +56,7 @@ const getAlldogs = async (name) => {
   const dogsDB = await getdogdb(); // dog de la db
   const dogApi = await getDogApi(); // dog de la api
   const allDogs = [...dogsDB, ...dogApi]; // todos los dogs
+
   if (name) {
     let filterDogs = allDogs.filter((dog) =>
       dog.name.toLowerCase().includes(name.toLowerCase())
@@ -63,6 +64,7 @@ const getAlldogs = async (name) => {
     if (filterDogs.length) {
       return filterDogs;
     }
+    throw new Error("No se encontro un perro con ese nombre");
   } else {
     return allDogs;
   }
