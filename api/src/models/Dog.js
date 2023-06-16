@@ -14,12 +14,12 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: {
-            args: [5, 10],
-            msg: "El nombre debe contener entre 5 y 10 caracteres",
-          },
-        },
+        // validate: {
+        //   len: {
+        //     args: [5, 10],
+        //     msg: "El nombre debe contener entre 5 y 10 caracteres",
+        //   },
+        // },
       },
       imagen: {
         type: STRING,
