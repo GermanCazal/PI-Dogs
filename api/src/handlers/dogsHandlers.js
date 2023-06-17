@@ -39,7 +39,7 @@ const postDogsHandler = async (req, res) => {
   try {
     if (!name || !imagen) return res.status(400).json({ msg: "faltan datos" });
     const response = await createDogDB(name, imagen, altura, peso, añosDeVida);
-    res.status(200).json(response);
+    res.status(200).json("Creado exitosamente");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

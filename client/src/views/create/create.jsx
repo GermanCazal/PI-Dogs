@@ -1,8 +1,10 @@
+import "./create.styles.css";
+import axios from "axios";
 import { useState } from "react";
-
 function Create() {
   const [input, setInput] = useState({
     name: "",
+    imagen:"",
     altura: "",
     peso: "",
     añosDeVida: ""
@@ -10,6 +12,7 @@ function Create() {
 
   const [error, setError] = useState({
     name: "",
+    imagen:"",
     altura: "",
     peso: "",
     añosDeVida: ""
@@ -17,23 +20,27 @@ function Create() {
 
   const validate = (input) => {
     let validationError = {};
-
-    if (input.name === "" || input.name[0].trim().length === 0) {
+  
+    if (input.name === "" || input.name.trim().length === 0) {
       validationError.name = "Ingrese un nombre por favor";
     }
-
+  
     if (!/^\d+$/.test(input.altura)) {
       validationError.altura = "Ingrese una altura válida";
     }
-
+  
     if (!/^\d+$/.test(input.peso)) {
       validationError.peso = "Ingrese un peso válido";
     }
-
+  
     if (!/^\d+$/.test(input.añosDeVida)) {
       validationError.añosDeVida = "Ingrese años de vida válidos";
     }
-
+  
+    if (input.imagen === "" || !input.imagen.endsWith(".jpg")) {
+      validationError.imagen = "Ingrese un enlace de imagen válido que termine en '.jpg'";
+    }
+  
     return validationError;
   };
 
@@ -50,27 +57,24 @@ function Create() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (Object.keys(error).length === 0) {
-      alert("¡Todo está bien!");
-    } else {
-      alert("Faltan datos o hay errores en el formulario");
-    }
+    axios.post("http://localhost:3001/dogs",input)
+    .then(res=>alert("Su perro ha sido creado correctamente."))
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: "16rem"
-      }}
-    >
+    <div className="form">
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre:</label>
           <input name="name" value={input.name} onChange={handleChange} />
           {error.name && <p>{error.name}</p>}
         </div>
+        <div>
+              <label>Imagen:</label>
+              <input name="imagen" value={input.imagen} onChange={handleChange} />
+              {error.imagen && <p>{error.imagen}</p>}
+        </div>
+
         <div>
           <label>Altura:</label>
           <input name="altura" value={input.altura} onChange={handleChange} />
@@ -90,7 +94,7 @@ function Create() {
           />
           {error.añosDeVida && <p>{error.añosDeVida}</p>}
         </div>
-        {Object.keys(error).length === 0 && <button type="submit">ENVIAR</button>}
+        {Object.keys(error).length === 0 && <button type="submit">Crear Raza</button>}
       </form>
     </div>
   );
