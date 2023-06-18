@@ -1,26 +1,43 @@
-import"./home.styles.css"
-import {clearMessage, getUsers,getUsersByName } from "../../redux/actions";
-import {useDispatch,useSelector} from "react-redux"
-import { useEffect, useState,} from "react";
+import "./home.styles.css";
+import { clearMessage, getUsers, getUsersByName } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import CardList from "../../components/cardlist/CardList";
 import Navbar from "../../components/navbar/navbar";
 import { filter } from "../../redux/actions";
 
-
 function Home() {
   const dispatch = useDispatch();
-  const ITEMNS_PER_PAGE = 10
+  const ITEMS_PER_PAGE = 8;
   const allUsers = useSelector((state) => state.allUsers);
   const [searchString, setSearchString] = useState("");
   const messageError = useSelector((state) => state.message);
   const dogsFiltered = useSelector((state) => state.dogsFiltered);
-  const filters= useSelector((state) => state.filters);
-  const {currentPage, setCurrentPage} = useState(0)
-  const [items, setItems] = useState([...allUsers].splice (0, ITEMNS_PER_PAGE))
+  const filters = useSelector((state) => state.filters);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [items, setItems] = useState([]);
 
-const filterOrd = (event)=>{
-  dispatch(filter(event.target.value))
-}
+  const nextPage = () => {
+    const next_page = currentPage + 1;
+    const firstIndex = next_page * ITEMS_PER_PAGE;
+    if (firstIndex >= getDisplayedUsers().length) return;
+    setItems(getDisplayedUsers().slice(firstIndex, firstIndex + ITEMS_PER_PAGE));
+    setCurrentPage(next_page);
+  };
+
+  const prevPage = () => {
+    const prev_page = currentPage - 1;
+    if (prev_page >= 0) {
+      const firstIndex = prev_page * ITEMS_PER_PAGE;
+      if (prev_page < 0) return;
+      setItems(getDisplayedUsers().slice(firstIndex, firstIndex + ITEMS_PER_PAGE));
+      setCurrentPage(prev_page);
+    }
+  };
+
+  const filterOrd = (event) => {
+    dispatch(filter(event.target.value));
+  };
 
   useEffect(() => {
     if (!allUsers.length) {
@@ -30,13 +47,18 @@ const filterOrd = (event)=>{
       alert(messageError);
     }
     return () => {
-       dispatch(clearMessage());
-     };
+      dispatch(clearMessage());
+    };
+  }, [dispatch, allUsers, messageError]);
 
-   },[dispatch, allUsers, messageError])
+  useEffect(() => {
+    if (allUsers.length > 0) {
+      setItems(getDisplayedUsers().slice(0, ITEMS_PER_PAGE));
+      setCurrentPage(0);
+    }
+  }, [allUsers, dogsFiltered, filters, ITEMS_PER_PAGE]);
 
-
-   const handleChange = (event) => {
+  const handleChange = (event) => {
     setSearchString(event.target.value.toLowerCase());
   };
 
@@ -45,25 +67,26 @@ const filterOrd = (event)=>{
     dispatch(getUsersByName(searchString));
   };
 
+  const getDisplayedUsers = () => {
+    return filters ? dogsFiltered : allUsers;
+  };
 
-
-
-
-    return (
-      <div className="home">
-        <h1 className="home-title ">Estoy en home</h1>
-        <Navbar handleSubmit={handleSubmit} handleChange={handleChange}/>
-        <label> Ordenamiento por nombre</label>
-        <select onChange={filterOrd} name="" id="">
-          <option defaultChecked value="0">-</option>
-          <option value="asc">asc</option>
-          <option value="dct">dct</option>
-        </select>
-        {filters? <CardList allUsers={dogsFiltered}/>: <CardList allUsers={items}/>}
-        
+  return (
+    <div className="home">
+      <h1 className="home-title ">Estoy en home</h1>
+      <Navbar handleSubmit={handleSubmit} handleChange={handleChange} />
+      <div>
+        <button onClick={prevPage}>prev</button>
+        <button onClick={nextPage}>next</button>
       </div>
-    );
-  }
-  
+      <label>Ordenamiento por nombre</label>
+      <select onChange={filterOrd} name="" id="">
+        <option value="asc">asc</option>
+        <option value="dct">dct</option>
+      </select>
+      <CardList allUsers={items} />
+    </div>
+  );
+}
 
 export default Home;
