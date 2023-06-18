@@ -4,6 +4,8 @@ export const GET_USERS = "GET_USERS";
 export const GET_USERS_BY_NAME = "GET_USERS_BY_NAME";
 export const ERROR = "ERROR";
 export const CLEAN_MESSAGE = "CLEAN_MESSAGE";
+export const FILTERS = "FILTER";
+// export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 
 export function getUsers() {
   return async function (dispatch) {
@@ -34,10 +36,27 @@ export function getUsersByName(name) {
   };
 }
 
+// export const getDogDetail = (id) => {
+//   return function (dispatch) {
+//     axios(`http://localhost:3001/dogs/${id}`)
+//       .then((response) => response.data)
+//       .then((data) => dispatch({ type: GET_DOG_DETAIL, payload: data }));
+//   };
+// };
+
 export function clearMessage() {
   return function (dispatch) {
     return dispatch({
       type: "CLEAN_MESSAGE",
+    });
+  };
+}
+
+export function filter(orden) {
+  return function (dispatch) {
+    return dispatch({
+      type: FILTERS,
+      payload: orden,
     });
   };
 }

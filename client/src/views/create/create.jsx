@@ -15,7 +15,8 @@ function Create() {
     imagen:"",
     altura: "",
     peso: "",
-    añosDeVida: ""
+    añosDeVida: "",
+    temperaments:""
   });
 
   const validate = (input) => {
@@ -94,6 +95,12 @@ function Create() {
           />
           {error.añosDeVida && <p>{error.añosDeVida}</p>}
         </div>
+        <select name="temperaments" id="">
+          <option value="malo">malo</option>
+          <option value="dormilon">dormilon</option>
+          <option value="jugueton">jugueton</option>
+        </select>
+
         {Object.keys(error).length === 0 && <button type="submit">Crear Raza</button>}
       </form>
     </div>

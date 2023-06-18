@@ -1,9 +1,17 @@
-import { CLEAN_MESSAGE, ERROR, GET_USERS, GET_USERS_BY_NAME } from "../actions";
+import {
+  CLEAN_MESSAGE,
+  ERROR,
+  FILTERS,
+  GET_USERS,
+  GET_USERS_BY_NAME,
+} from "../actions";
 
 let initialState = {
   allUsers: [],
   copyUsers: [],
   message: "",
+  dogsFiltered: [],
+  filters: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -24,11 +32,40 @@ function rootReducer(state = initialState, action) {
         ...state,
         message: action.payload,
       };
+    // case GET_DOG_DETAIL:
+    //   return {
+    //     ...state,
+    //     dogsDetail: action.payload,
+    //   };
+
     case CLEAN_MESSAGE:
       return {
         ...state,
         message: "",
       };
+
+    case FILTERS:
+      if (action.payload === "asc") {
+        return {
+          ...state,
+          filters: true,
+          dogsFiltered: [...state.allUsers].sort((prev, next) => {
+            if (prev.name > next.name) return 1;
+            if (prev.name < next.name) return -1;
+            return 0;
+          }),
+        };
+      } else if (action.payload === "dct") {
+        return {
+          ...state,
+          filters: true,
+          dogsFiltered: [...state.allUsers].sort((prev, next) => {
+            if (prev.name > next.name) return -1;
+            if (prev.name < next.name) return 1;
+            return 0;
+          }),
+        };
+      }
 
     default:
       return state;

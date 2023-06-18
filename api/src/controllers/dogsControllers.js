@@ -22,7 +22,7 @@ const createDogDB = async (name, imagen, altura, peso, añosDeVida) => {
 const getById = async (id) => {
   if (isNaN(id)) {
     const dog = await Dog.findByPk(id);
-    return user;
+    return dog;
   }
   const dog = (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`))
     .data;
