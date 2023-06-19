@@ -1,0 +1,34 @@
+.image-container {
+    display: flex; /* Utilizamos flexbox para alinear la imagen */
+    justify-content: flex-end; /* Alinea la imagen hacia el final del contenedor */
+    margin-right: 200px; /* Margen derecho para separar la imagen del texto */
+  }
+  
+  .small-image {
+    max-width: 700px;
+    height: auto;
+  }
+
+
+  .welcome-title {
+    font-size: 28px; /* Tamaño de fuente del título */
+    color: #333; /* Color del texto del título */
+    margin-bottom: 10px; /* Margen inferior del título */
+    text-align: left; /* Alineación del texto a la izquierda */
+  }
+  
+  .start-button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    padding: 12px 24px; /* Espaciado interno del botón */
+    border: none; /* Quita el borde del botón */
+    border-radius: 4px; /* Borde redondeado del botón */
+    font-size: 18px; /* Tamaño de fuente del botón */
+    cursor: pointer; /* Cambia el cursor al pasar por encima del botón */
+    text-align: left; /* Alineación del texto a la izquierda */
+  }
+  
+  .start-button:hover {
+    background-color: #0056b3; /* Color de fondo del botón al pasar el cursor por encima */
+  }
+  
