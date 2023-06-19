@@ -75,16 +75,16 @@ function Home() {
     <div className="home">
       <h1 className="home-title ">Estoy en home</h1>
       <Navbar handleSubmit={handleSubmit} handleChange={handleChange} />
-      <div>
-        <button onClick={prevPage}>prev</button>
-        <button onClick={nextPage}>next</button>
-      </div>
       <label>Ordenamiento por nombre</label>
       <select onChange={filterOrd} name="" id="">
         <option value="asc">asc</option>
         <option value="dct">dct</option>
       </select>
       <CardList allUsers={items} />
+      <div>
+        <button onClick={prevPage}>prev</button>
+        <button onClick={nextPage}>next</button>
+      </div>
     </div>
   );
 }

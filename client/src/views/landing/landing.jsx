@@ -1,8 +1,15 @@
+import {Link} from "react-router-dom"
 
-function Landing() {
+
+const Landing=()=> {
     return (
       <div>
-        <h1>Estoy en landing</h1>
+
+        <h1>Inicio de mi app</h1>
+        <img src="./_107435681_perro1.jpg" alt="dog" />
+        <Link to="/home">
+        <button>Iniciar</button>
+        </Link>
       </div>
     );
   }
