@@ -1,5 +1,6 @@
 import axios from "axios";
 
+export const GET_TEMPERAMENT = "GET_TEMPERAMENTS";
 export const GET_USERS = "GET_USERS";
 export const GET_USERS_BY_NAME = "GET_USERS_BY_NAME";
 export const ERROR = "ERROR";
@@ -32,6 +33,20 @@ export function getUsersByName(name) {
         type: "ERROR",
         payload: error.response.data.error,
       });
+    }
+  };
+}
+
+export function getTemperaments() {
+  return async function (dispatch) {
+    try {
+      var res = await axios.get("/temperament");
+      return dispatch({
+        type: GET_TEMPERAMENT,
+        payload: res.data,
+      });
+    } catch (error) {
+      alert(error);
     }
   };
 }

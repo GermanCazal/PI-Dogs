@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./create.styles.css";
 
@@ -9,6 +9,7 @@ const Create = () => {
     height: "",
     weight: "",
     life_span: "",
+    temperament: ""
   });
 
   const [error, setError] = useState({
@@ -17,7 +18,20 @@ const Create = () => {
     height: "",
     weight: "",
     life_span: "",
+    temperament: ""
   });
+
+  const [tempForm, setTempForm] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/temperament")
+      .then((res) => {
+        setTempForm(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const validate = (input) => {
     let validationError = {};
@@ -46,6 +60,17 @@ const Create = () => {
     return validationError;
   };
 
+  const handleTemperaments = (event) => {
+    const selectedTemperament = tempForm.find((item) => item.name === event.target.value);
+
+    setInput((prevState) => ({
+      ...prevState,
+      temperament: selectedTemperament.name,
+    }));
+
+    setError(validate({ ...input, temperament: selectedTemperament.name }));
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -59,9 +84,13 @@ const Create = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:3001/dogs", input)
-      .then((res) => alert("Su perro ha sido creado correctamente."));
+    axios.post("http://localhost:3001/dogs", input)
+      .then((res) => {
+        alert("Su perro ha sido creado correctamente.");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -124,12 +153,16 @@ const Create = () => {
           {error.life_span && <p className="error">{error.life_span}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="temperaments">Temperamentos:</label>
-          <select id="temperaments" name="temperaments">
-            <option value="malo">malo</option>
-            <option value="dormilon">dormilon</option>
-            <option value="jugueton">jugueton</option>
+          <label htmlFor="temperament">Temperamentos:</label>
+          <select id="temperament" name="temperament" onChange={handleTemperaments}>
+            <option value="default">Choose</option>
+            {tempForm?.map((item) => (
+              <option value={item.name} key={item.id}>
+                {item.name}
+              </option>
+            ))}
           </select>
+          {error.temperament && <p className="error">{error.temperament}</p>}
         </div>
         {Object.keys(error).length === 0 && (
           <button type="submit" className="submit-button">
@@ -142,3 +175,4 @@ const Create = () => {
 };
 
 export default Create;
+

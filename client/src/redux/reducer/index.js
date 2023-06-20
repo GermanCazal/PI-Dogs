@@ -4,6 +4,7 @@ import {
   FILTERS,
   GET_USERS,
   GET_USERS_BY_NAME,
+  GET_TEMPERAMENT,
 } from "../actions";
 
 let initialState = {
@@ -66,6 +67,11 @@ function rootReducer(state = initialState, action) {
           }),
         };
       }
+    case GET_TEMPERAMENT:
+      return {
+        ...state,
+        temperaments: action.payload,
+      };
 
     default:
       return state;

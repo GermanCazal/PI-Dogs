@@ -13,7 +13,13 @@ const axios = require("axios");
 //Post de un dog a la DB
 
 const createDogDB = async (name, image, height, weight, life_span) => {
-  const newDog = await Dog.create({ name, image, height, weight, life_span });
+  const newDog = await Dog.create({
+    name,
+    image,
+    height,
+    weight,
+    life_span,
+  });
   return newDog;
 };
 
