@@ -20,13 +20,44 @@ const createDogDB = async (name, imagen, altura, peso, añosDeVida) => {
 //traigo un dog por id desde la api o db
 
 const getById = async (id) => {
-  if (isNaN(id)) {
-    const dog = await Dog.findByPk(id);
-    return dog;
+  if (id.includes("-")) {
+    let dogDB = await Dog.findOne({
+      where: {
+        id: id,
+      },
+      include: Temperament,
+    });
+
+    dogDB = JSON.stringify(dogDB);
+    dogDB = JSON.parse(dogDB);
+
+    dogDB.temperaments = dogDB.temperaments.map((d) => d.name + ", ");
+    return dogDB;
+  } else {
+    const response = await axios.get(
+      `https://api.thedogapi.com/v1/breeds/${id}`
+    );
+
+    let {
+      id: breedId,
+      name,
+      weight,
+      height,
+      life_span,
+      temperament,
+      reference_image_id,
+    } = response.data;
+
+    return {
+      id: breedId,
+      name,
+      weight: weight.metric,
+      height: height.metric,
+      life_span,
+      temperaments: temperament,
+      image: `https://cdn2.thedogapi.com/images/${reference_image_id}.jpg`,
+    };
   }
-  const dog = (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`))
-    .data;
-  return dog;
 };
 
 //traigo todos los dog de la db

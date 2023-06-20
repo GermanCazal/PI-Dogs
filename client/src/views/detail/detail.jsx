@@ -26,10 +26,10 @@ const Detail = () => {
 
   return (
     <div>
-      <img src={dogs?.imagen} alt={dogs?.name} />
+      <img src={dogs?.image} alt={dogs?.name} />
       <h2>Nombre: {dogs.name}</h2>
       <h2>Temperamento: {dogs.temperament}</h2>
-      <h2>Altura: {dogs.altura}</h2>
+      <h2>Altura: {dogs?.height?.imperial}</h2>
       <h2>Años de Vida: {dogs.life_span}</h2>
     </div>
   );
