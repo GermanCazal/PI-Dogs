@@ -5,19 +5,18 @@ import "./create.styles.css";
 const Create = () => {
   const [input, setInput] = useState({
     name: "",
-    imagen: "",
-    altura: "",
-    peso: "",
-    añosDeVida: ""
+    image: "",
+    height: "",
+    weight: "",
+    life_span: "",
   });
 
   const [error, setError] = useState({
     name: "",
-    imagen: "",
-    altura: "",
-    peso: "",
-    añosDeVida: "",
-    temperaments: ""
+    image: "",
+    height: "",
+    weight: "",
+    life_span: "",
   });
 
   const validate = (input) => {
@@ -27,37 +26,35 @@ const Create = () => {
       validationError.name = "Ingrese un nombre por favor";
     }
 
-    if (!/^\d+$/.test(input.altura)) {
-      validationError.altura = "Ingrese una altura válida";
-    }
-
-    if (!/^\d+$/.test(input.peso)) {
-      validationError.peso = "Ingrese un peso válido";
-    }
-
-    if (!/^\d+$/.test(input.añosDeVida)) {
-      validationError.añosDeVida = "Ingrese años de vida válidos";
-    }
-
-    if (input.imagen === "" || !input.imagen.endsWith(".jpg")) {
-      validationError.imagen =
+    if (input.image === "" || !input.image.endsWith(".jpg")) {
+      validationError.image =
         "Ingrese un enlace de imagen válido que termine en '.jpg'";
+    }
+
+    if (!/^\d+$/.test(input.height)) {
+      validationError.height = "Ingrese una altura válida";
+    }
+
+    if (!/^\d+$/.test(input.weight)) {
+      validationError.weight = "Ingrese un peso válido";
+    }
+
+    if (!/^\d+$/.test(input.life_span)) {
+      validationError.life_span = "Ingrese años de vida válidos";
     }
 
     return validationError;
   };
 
   const handleChange = (event) => {
-    setInput({
-      ...input,
-      [event.target.name]: event.target.value
-    });
-    setError(
-      validate({
-        ...input,
-        [event.target.name]: event.target.value
-      })
-    );
+    const { name, value } = event.target;
+
+    setInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    setError(validate({ ...input, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -83,48 +80,48 @@ const Create = () => {
           {error.name && <p className="error">{error.name}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="imagen">Imagen:</label>
+          <label htmlFor="image">Imagen:</label>
           <input
             type="text"
-            id="imagen"
-            name="imagen"
-            value={input.imagen}
+            id="image"
+            name="image"
+            value={input.image}
             onChange={handleChange}
           />
-          {error.imagen && <p className="error">{error.imagen}</p>}
+          {error.image && <p className="error">{error.image}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="altura">Altura:</label>
+          <label htmlFor="height">Altura:</label>
           <input
             type="text"
-            id="altura"
-            name="altura"
-            value={input.altura}
+            id="height"
+            name="height"
+            value={input.height}
             onChange={handleChange}
           />
-          {error.altura && <p className="error">{error.altura}</p>}
+          {error.height && <p className="error">{error.height}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="peso">Peso:</label>
+          <label htmlFor="weight">Peso:</label>
           <input
             type="text"
-            id="peso"
-            name="peso"
-            value={input.peso}
+            id="weight"
+            name="weight"
+            value={input.weight}
             onChange={handleChange}
           />
-          {error.peso && <p className="error">{error.peso}</p>}
+          {error.weight && <p className="error">{error.weight}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="añosDeVida">Años de vida:</label>
+          <label htmlFor="life_span">Años de vida:</label>
           <input
             type="text"
-            id="añosDeVida"
-            name="añosDeVida"
-            value={input.añosDeVida}
+            id="life_span"
+            name="life_span"
+            value={input.life_span}
             onChange={handleChange}
           />
-          {error.añosDeVida && <p className="error">{error.añosDeVida}</p>}
+          {error.life_span && <p className="error">{error.life_span}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="temperaments">Temperamentos:</label>

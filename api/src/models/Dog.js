@@ -21,16 +21,16 @@ module.exports = (sequelize) => {
         //   },
         // },
       },
-      imagen: {
+      image: {
         type: STRING,
       },
-      altura: {
+      height: {
         type: FLOAT,
       },
-      peso: {
+      weight: {
         type: FLOAT,
       },
-      añosDeVida: {
+      life_span: {
         type: INTEGER,
       },
     },

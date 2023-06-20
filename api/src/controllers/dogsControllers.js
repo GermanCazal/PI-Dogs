@@ -12,8 +12,8 @@ const axios = require("axios");
 
 //Post de un dog a la DB
 
-const createDogDB = async (name, imagen, altura, peso, añosDeVida) => {
-  const newDog = await Dog.create({ name, imagen, altura, peso, añosDeVida });
+const createDogDB = async (name, image, height, weight, life_span) => {
+  const newDog = await Dog.create({ name, image, height, weight, life_span });
   return newDog;
 };
 
@@ -73,10 +73,10 @@ const getDogApi = async () => {
     return {
       id: dog.id,
       name: dog.name,
-      imagen: dog.image.url,
-      altura: dog.height.metric,
-      peso: dog.weight.metric,
-      añosdeVida: dog.life_span,
+      image: dog.image.url,
+      height: dog.height.metric,
+      weight: dog.weight.metric,
+      life_span: dog.life_span,
       temperaments: dog.temperament,
     };
   });

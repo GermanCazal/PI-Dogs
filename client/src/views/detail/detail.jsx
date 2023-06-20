@@ -24,14 +24,21 @@ const Detail = () => {
 
   console.log(dogs)
 
+
+  const height = dogs.height?.imperial || dogs.alto;
+  const image = dogs.image || dogs.imegen
+  const life_span = dogs.life_span || dogs.AñosDeVida
+
   return (
     <div>
-      <img src={dogs?.image} alt={dogs?.name} />
+      <img src={image} alt={dogs?.name} />
       <h2>Nombre: {dogs.name}</h2>
       <h2>Temperamento: {dogs.temperament}</h2>
-      <h2>Altura: {dogs?.height?.imperial}</h2>
-      <h2>Años de Vida: {dogs.life_span}</h2>
+      <h2>Altura: {height}</h2>
+      <h2>Años de Vida: {life_span}</h2>
     </div>
+
+
   );
 };
 
