@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import CardList from "../../components/cardlist/CardList";
 import Navbar from "../../components/navbar/navbar";
 import { filter } from "../../redux/actions";
-import {Link} from "react-router-dom";
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -74,17 +74,20 @@ function Home() {
 
   return (
     <div className="home">
-      <h1 className="home-title ">Estoy en home</h1>
-      <Navbar handleSubmit={handleSubmit} handleChange={handleChange} />
-      <Link to={`/create`}> Create</Link>
+      
+      <Navbar handleSubmit={handleSubmit} handleChange={handleChange}/>
+     
+     
 
-      <label>Ordenamiento por nombre</label>
-      <select onChange={filterOrd} name="" id="">
-        <option value="asc">asc</option>
-        <option value="dct">dct</option>
-      </select>
+      <div className="Filter">
+  <label className="filterLabel">Ordenamiento</label>
+  <select className="filterSelect" onChange={filterOrd} name="" id="">
+    <option value="asc">asc</option>
+    <option value="dct">dct</option>
+  </select>
+</div>
       <CardList allUsers={items} />
-      <div>
+      <div className="paginado">
         <button onClick={prevPage}>prev</button>
         <button onClick={nextPage}>next</button>
       </div>

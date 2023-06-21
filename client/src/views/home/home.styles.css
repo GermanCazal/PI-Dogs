@@ -28,3 +28,65 @@ body {
     align-items: center;
   }
   
+
+  .navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  .navBar a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #f2f2f2;
+  }
+  
+  .navBar a:hover {
+    background-color: #f00000;
+  }
+  
+  .Filter {
+    margin-top: 20px;
+  }
+  
+  .Filter label {
+    margin-right: 10px;
+  }
+  
+  .paginado {
+    margin-top: 20px;
+  }
+  
+  .paginado button {
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 5px 10px;
+  }
+
+
+
+  .Filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .filterLabel {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .filterSelect {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+
+
+
+ 
