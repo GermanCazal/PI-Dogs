@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import img from "./cute-and-happy-dog.png";
 import "./landing.styles.css";
 
 const Landing = () => {
   return (
     <div className="landing-container">
-      <h1 className="welcome-title">Welcome</h1>
-      <div className="image-container">
-        <img src={img} alt="" className="small-image" />
-      </div>
-      <Link to="/home">
-        <button className="start-button">Iniciar</button>
+
+      <div className="welcome-conteiner">
+      <h1>Welcom</h1>
+      <Link className="button" to="/home">
+        Iniciar
       </Link>
+      </div>
+
     </div>
   );
 };

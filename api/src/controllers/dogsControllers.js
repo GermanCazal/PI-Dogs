@@ -105,7 +105,6 @@ const getAlldogs = async (name) => {
   } else {
     return allDogs;
   }
-  return allDogs;
 };
 
 //post hago un post a la db
