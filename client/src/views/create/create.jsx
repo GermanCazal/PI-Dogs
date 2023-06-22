@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./create.styles.css";
-
+import img from "../../img/icons8-casa-50.png"
+import {Link} from "react-router-dom";
 const Create = () => {
   const [input, setInput] = useState({
     name: "",
@@ -94,7 +95,13 @@ const Create = () => {
   };
 
   return (
-    <div className="form-container">
+  <div className="form-container">
+<div className="icon-container">
+       <Link to ={`/home`} className="home-link">
+  <img src={img} alt="" /> HOME
+</Link>
+</div>
+
       <form className="form" onSubmit={handleSubmit}>
         <h2>Crear Raza</h2>
         <div className="form-group">
@@ -169,10 +176,13 @@ const Create = () => {
             Crear Raza
           </button>
         )}
+        {/* <div className="image-container">
+          <img src={img} alt="" />
+        </div> */}
+
       </form>
     </div>
   );
 };
 
 export default Create;
-

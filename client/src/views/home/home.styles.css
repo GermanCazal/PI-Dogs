@@ -58,33 +58,44 @@ body {
   }
   
   .paginado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 20px;
   }
   
   .paginado button {
-    border-radius: 10px;
-    margin-right: 10px;
-    padding: 5px 10px;
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
   }
-
-
+  
+  .paginado button:hover {
+    background-color: #ddd;
+  }
 
   .Filter {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    justify-content: flex-end;
+    margin-right: 20px;
   }
   
   .filterLabel {
     margin-right: 10px;
-    font-weight: bold;
+    font-size: 16px;
   }
   
   .filterSelect {
     padding: 5px;
-    border: 1px solid #ccc;
+    font-size: 16px;
     border-radius: 4px;
   }
+  
 
 
 
